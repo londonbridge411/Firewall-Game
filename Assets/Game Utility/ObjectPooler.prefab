@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1937020165623711145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1937020165623711151}
+  - component: {fileID: 1937020165623711150}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1937020165623711151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937020165623711145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 122.561615, y: 153.18582, z: -66.9988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1937020165623711150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937020165623711145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cada9e8480ebc3c4986460c8101bb7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: GhostLMG
+    prefab: {fileID: 1241210004716277551, guid: 7143a83297321d646a3c18d1ea351aba, type: 3}
+    size: 10
+  - tag: GhostPistol
+    prefab: {fileID: 7549370382679685986, guid: cca8fe712763b8d4885db51b775bbd45, type: 3}
+    size: 10
+  - tag: GhostBlaster
+    prefab: {fileID: 7215583569730033419, guid: 50b60888d813293479fec74a14ebcd60, type: 3}
+    size: 10
+  - tag: GhostShotgun
+    prefab: {fileID: 3612203856235373960, guid: 25834762d4444ac4abfcaaf9e9df6df4, type: 3}
+    size: 10
+  - tag: SmallBlast
+    prefab: {fileID: 8634803873998897243, guid: f1bb608fad71a6543a1929c01a32e59e, type: 3}
+    size: 1
+  - tag: Blast
+    prefab: {fileID: 4337612825487977973, guid: c1d9572b6f5414144b49f467391f2792, type: 3}
+    size: 1
+  - tag: BigBlast
+    prefab: {fileID: 6155770845891949712, guid: edc15c3f6976e324ab408a3e27a4bfe4, type: 3}
+    size: 1
+  - tag: Pellets
+    prefab: {fileID: 8398433290819559800, guid: 8375a2463ec961b4e8fd4cb148482751, type: 3}
+    size: 2
+  - tag: PistolBullet
+    prefab: {fileID: 6844627771600418801, guid: 5cea78ad0ef017b4fae8dee4da290296, type: 3}
+    size: 3
+  - tag: Bullet
+    prefab: {fileID: 6844627771600418801, guid: d10107c9986d7b64584675c0438c0026, type: 3}
+    size: 50
+  - tag: Shell
+    prefab: {fileID: 6844627771600418801, guid: 6002b3795d1cf73438acef8715d557e1, type: 3}
+    size: 100

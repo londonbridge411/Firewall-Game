@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7abccb4cc9dacb1438c4c8f5d5c46784
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ghostPrefabBlaster: {fileID: 7215583569730033419, guid: 50b60888d813293479fec74a14ebcd60, type: 3}
+  - ghostPrefabPistol: {fileID: 7549370382679685986, guid: cca8fe712763b8d4885db51b775bbd45, type: 3}
+  - ghostPrefabMachineGun: {fileID: 1241210004716277551, guid: 7143a83297321d646a3c18d1ea351aba, type: 3}
+  - ghostPrefabShotgun: {fileID: 3612203856235373960, guid: 25834762d4444ac4abfcaaf9e9df6df4, type: 3}
+  - material: {fileID: 2100000, guid: a2e5cbece428c774f97a178cb66a97d3, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
