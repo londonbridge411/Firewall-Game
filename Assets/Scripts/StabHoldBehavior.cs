@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using bowen.StateMachine;
 using UnityEngine;
+using bowen.StateMachine.XZ10;
 
 public class StabHoldBehavior : StateMachineBehaviour
 {
     private bool timerOn;
     private float prevTime;
-    private float timerTime = 1.5f;
+    private float timerTime = 0.75f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,6 +20,7 @@ public class StabHoldBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
         if (timerOn)
         {
             timerTime -= Time.deltaTime;
@@ -27,24 +29,17 @@ public class StabHoldBehavior : StateMachineBehaviour
             {
                 timerTime = prevTime;
                 timerOn = false;
+                BattleState.instance.ToSubState(BattleState.subState.Stab);
             }
         }
 
-        if (XZ10Script.instance.objectSpotted || timerOn == false)
-        {
-            BattleState.instance.anim.SetBool("Charging", false);
-            BattleState.instance.isCharging = false;
-            BattleState.instance.isAttacking = true;
-            BattleState.instance.ToSubState(BattleState.subState.Attack);
-        }
+        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Exiting subState");
-        BattleState.instance.isCharging = false;
-        BattleState.instance.anim.SetBool("Charging", false);
+        BattleState.instance.ToSubState(BattleState.subState.Stab);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

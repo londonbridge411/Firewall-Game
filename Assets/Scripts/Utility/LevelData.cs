@@ -18,7 +18,6 @@ public class LevelData : MonoBehaviour, ISaveable
     public object CaptureState()
     {
         //levelNumber = SceneManager.GetActiveScene().buildIndex;
-        print("Saved Scene " + levelNumber);
 
         return new SaveData
         {
@@ -31,7 +30,6 @@ public class LevelData : MonoBehaviour, ISaveable
         var saveData = (SaveData)state;
 
         levelNumber = saveData.levelNumber;
-        print("Loaded Scene " + levelNumber);
     }
 
     [Serializable]

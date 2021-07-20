@@ -24,11 +24,6 @@ public class PlayerData : MonoBehaviour, ISaveable
     }
     #endregion
 
-    private void Update()
-    {
-        print("Score is " + score);
-    }
-
     static PlayerStats player;
 
     //Position

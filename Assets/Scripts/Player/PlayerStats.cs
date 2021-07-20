@@ -24,13 +24,23 @@ public class PlayerStats : MonoBehaviour
     public void Damage(float dmg)
     {
         if (canDamage)
+        {
             health -= dmg;
+            StartCoroutine(DamageCooldown());
+        }      
     }
 
     public IEnumerator IFrames()
     {
         canDamage = false;
         yield return new WaitForSeconds(iFrameTime);
+        canDamage = true;
+    }
+
+    private IEnumerator DamageCooldown()
+    {
+        canDamage = false;
+        yield return new WaitForSeconds(1);
         canDamage = true;
     }
 }

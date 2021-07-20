@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Desktop/Desktop Test.unity
     guid: c9395f30aec828b4a977d8a39078d6ab
-  - enabled: 1
-    path: Assets/Scenes/Levels/Console/Console.unity
-    guid: d05c2472599bda149a5798e63701aefa
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

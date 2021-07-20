@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7191572036384174276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7191572036384174278}
+  - component: {fileID: 7191572036384174277}
+  m_Layer: 9
+  m_Name: BattleState
+  m_TagString: BattleState
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7191572036384174278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191572036384174276}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7191572036384174277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191572036384174276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb73e8e06033ef4ba2657e5e8b86295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSubState: 0
+  anim: {fileID: 0}
+  isCharging: 0
+  isAttacking: 0
+  canAttack: 0
+  isAngered: 0
+  tasks:
+  - {fileID: 7085395520452029511, guid: 53086332ff4de0f4b9b6eeaa8f083367, type: 3}
+  - {fileID: 6566335616339397591, guid: 5c285d820118d2d4bb890ee8521117f0, type: 3}
+  - {fileID: 2746831047142889437, guid: 592039de89dd36c4d9751275fc3f0830, type: 3}
+  particles: {fileID: 0}

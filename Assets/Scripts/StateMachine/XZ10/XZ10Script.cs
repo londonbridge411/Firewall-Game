@@ -11,6 +11,8 @@ public class XZ10Script : MonoBehaviour
     float timer = 1, prevTime;
     bool timerOn;
     public float meleeRange;
+    public List<State> states;
+
 
     [Header("Field of View")]
     public bool objectSpotted;
@@ -41,7 +43,7 @@ public class XZ10Script : MonoBehaviour
         isPhase2 = false;
         nav = GetComponentInChildren<NavMeshAgent>();
         FSM = GetComponent<StateMachine>();
-        FSM.DefaultState(IdleState.instance);
+        FSM.DefaultState(states[0]);
     }
 
     private void Update()
@@ -62,12 +64,12 @@ public class XZ10Script : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-            FSM.SwitchToState(IdleState.instance);
+            FSM.SwitchToState(states[0]); //Idle State
         }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            FSM.SwitchToState(BattleState.instance);
+            FSM.SwitchToState(states[1]); //Battle State
         }
 
         FSM.StateUpdate();
@@ -121,5 +123,10 @@ public class XZ10Script : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, meleeRange);
+    }
+
+    public void SetDashFalse()
+    {
+        bowen.StateMachine.XZ10.DashState.instance.SetDashFalse();
     }
 }

@@ -6,8 +6,8 @@ namespace bowen.StateMachine
 {
     public class StateMachine : MonoBehaviour //extends to HFSM
     {
-        IState currentState;
-        IState previousState;
+        public State currentState;
+        State previousState;
 
         [SerializeField] string State = string.Empty;
 
@@ -24,7 +24,7 @@ namespace bowen.StateMachine
             State = GetName();           
         }
 
-        public void DefaultState(IState state)
+        public void DefaultState(State state)
         {
             currentState = state;
         }
@@ -49,7 +49,7 @@ namespace bowen.StateMachine
             }
         }
 
-        public void SwitchToState(IState state)
+        public void SwitchToState(State state)
         {
             if (currentState == state)
             {
