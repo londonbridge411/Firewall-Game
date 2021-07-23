@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3025953951158297717}
   - component: {fileID: 3025953951158297716}
   - component: {fileID: 3025953951158297718}
-  - component: {fileID: 3025953951158297719}
   - component: {fileID: 1452296507}
   m_Layer: 0
   m_Name: CM vcam1
@@ -61,7 +60,10 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
+    ModeOverride: 0
     LensShift: {x: 0, y: 0}
+    GateFit: 2
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -82,21 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627d765bfde96ce4eb81ea5d14c3ffec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalMaterial: {fileID: 2100000, guid: c18f78e7cbc414948938092d96c9e679, type: 2}
-  transparentMaterial: {fileID: 2100000, guid: c74961f0ff8f43245831e48a457ef428, type: 2}
---- !u!65 &3025953951158297719
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3025953951158297715}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25, z: 16.98}
-  m_Center: {x: 0, y: 0, z: 8.12}
 --- !u!114 &1452296507
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class CameraScript : MonoBehaviour
     public static CameraScript instance;
     private CinemachineBasicMultiChannelPerlin cameraNoise;
     private Animator anim;
-    float value;
 
     private void Awake()
     {
@@ -30,55 +29,7 @@ public class CameraScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "Disappear")
-        {
-            for(int i = 0; i < col.transform.childCount; i++)
-            {
-                StartCoroutine(SetModeTransparent(col.transform.GetChild(i).gameObject, true));
-            }
 
-        }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.tag == "Disappear")
-        {
-            for (int i = 0; i < col.transform.childCount; i++)
-            {
-                StartCoroutine(SetModeTransparent(col.transform.GetChild(i).gameObject, false));
-            }
-        }     
-    }
-
-
-    public IEnumerator SetModeTransparent(GameObject obj, bool setTransparent)
-    {
-        MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
-        renderer.material = new Material(renderer.material);
-        Material currentMaterial = renderer.material;
-
-        if (setTransparent)
-        {
-            for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
-            {
-                value = Mathf.Lerp(1, 0, t);
-                currentMaterial.SetFloat("Vector1_74A4DCF8", value);
-                yield return null;
-            }
-        }
-        else
-        {
-            for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
-            {
-                value = Mathf.Lerp(0, 1, t);
-                currentMaterial.SetFloat("Vector1_74A4DCF8", value);
-                yield return null;
-            }
-        }
-    }
 
     public IEnumerator Shake(float amplitudeGain, float frequencyGain, float time)
     {

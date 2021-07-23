@@ -19,6 +19,7 @@ TagManager:
   - Boundary
   - Elevator
   - Disappear
+  - Window
   layers:
   - Default
   - TransparentFX
