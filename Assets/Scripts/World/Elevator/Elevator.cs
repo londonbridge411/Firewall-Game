@@ -59,7 +59,6 @@ public class Elevator : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        int i = 0;
         if (col.tag.Equals("Player"))
         {
             foreach (ElevatorDoor door in elevatorDoors)

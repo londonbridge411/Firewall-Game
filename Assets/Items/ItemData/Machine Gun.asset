@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb38fce13d108447b749aac424a18e3, type: 3}
+  m_Name: Machine Gun
+  m_EditorClassIdentifier: 
+  itemObject: {fileID: 8606909069155658776, guid: b9ed6d38735c84242a583c9d96d7e35b, type: 3}
+  itemName: Machine Gune
+  itemQuantity: 0
+  itemLore: '"Gun go brrrrrrrrr"'

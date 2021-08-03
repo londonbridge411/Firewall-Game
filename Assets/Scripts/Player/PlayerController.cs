@@ -26,8 +26,15 @@ public class PlayerController : MonoBehaviour
     bool isDashing;
     public bool canMove;
     public GameObject punchObj;
+    public GameObject flashlight;
     Vector3 movementDirection;
 
+    //For Interactables
+    bool byElevator;
+    GameObject elevator; //nearest elevator
+
+    bool byInteractable;
+    public GameObject interactable;
 
     void Awake()
     {
@@ -59,14 +66,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stamina_Bar == null)
-        {
-            stamina_Bar = FindObjectOfType<Stamina_Bar>();
-        }
-
         if (MenuControl.instance.isPaused)
         {
             return;
+        }
+
+        if (Input.GetButtonDown("Flashlight"))
+        {
+            if (flashlight.activeSelf)
+                flashlight.SetActive(false);
+            else
+                flashlight.SetActive(true);
+        }
+
+        if (stamina_Bar == null)
+        {
+            stamina_Bar = FindObjectOfType<Stamina_Bar>();
         }
 
         RotatePlayer();
@@ -95,6 +110,7 @@ public class PlayerController : MonoBehaviour
         {
             hitZero = true;
         }
+
         else if (hitZero == false)
         {
             //Dash
@@ -126,6 +142,8 @@ public class PlayerController : MonoBehaviour
                 hitZero = false;
             }
         }
+
+        ElevatorControl();
     }
     private void FixedUpdate()
     {
@@ -155,15 +173,47 @@ public class PlayerController : MonoBehaviour
                 other.GetComponentInParent<ObjectManager>().DisableObject();
             }
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
         if (other.tag.Equals("Elevator"))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            elevator = other.gameObject;
+            byElevator = true;
+        }
+
+        if (other.tag.Equals("Interactable"))
+        {
+            interactable = other.gameObject;
+            byInteractable = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag.Equals("Elevator"))
+            byElevator = false;
+
+        if (other.tag.Equals("Interactable"))
+            byInteractable = false;
+    }
+
+    void ElevatorControl()
+    {
+        if (byElevator)
+        {
+            if (Input.GetButtonDown("Interact"))
             {
-                other.GetComponent<Elevator>().Move();
+                elevator.GetComponent<Elevator>().Move();
+            }
+        }
+    }
+
+    void InteractableControl()
+    {
+        if (byInteractable)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                //interactable.GetComponent<Elevator>().Move();
             }
         }
     }
@@ -175,7 +225,6 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.down);
     }
-
 
     IEnumerator DashTimer(float t)
     {
