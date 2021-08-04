@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Machine Gun
   m_EditorClassIdentifier: 
   itemObject: {fileID: 8606909069155658776, guid: b9ed6d38735c84242a583c9d96d7e35b, type: 3}
-  itemName: Machine Gune
+  itemName: Machine Gun
   itemQuantity: 0
   itemLore: '"Gun go brrrrrrrrr"'
