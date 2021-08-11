@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bb38fce13d108447b749aac424a18e3, type: 3}
-  m_Name: Ooga
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
-  itemName: Item 2
+  itemObject: {fileID: 3208568650037775287, guid: 035d879c54fdffb49868dd07cbdce028, type: 3}
+  itemName: Pistol
   itemQuantity: 4
   itemLore: AAASD

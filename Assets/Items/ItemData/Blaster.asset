@@ -7,12 +7,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bb38fce13d108447b749aac424a18e3, type: 3}
-  m_Name: Ooga 1
+  m_Name: Blaster
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
-  itemName: Booty
+  itemObject: {fileID: 8344363340251495751, guid: 56acad7e78437e04ba68910e6d7af0fb, type: 3}
+  itemName: Blaster
   itemQuantity: 0
-  itemLore: AAAAAAASXZDASDASDASD
+  itemLore: AHAHAHHAHA

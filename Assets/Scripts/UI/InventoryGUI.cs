@@ -65,12 +65,7 @@ public class InventoryGUI : MonoBehaviour
     {
         GameObject obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 
-        if (itemName.GetComponent<TextMeshProUGUI>().text == obj.GetComponent<TextMeshProUGUI>().text)
-        {
-            ResetInfo();
-        }
-        else if (itemName.GetComponent<TextMeshProUGUI>().text != obj.GetComponent<TextMeshProUGUI>().text)
-            CloseInfo();
+        ResetInfo();
 
 
         description.GetComponent<TextMeshProUGUI>().text = ItemDatabase.instance.GetItem(obj.GetComponent<TextMeshProUGUI>().text).itemLore;
@@ -86,7 +81,9 @@ public class InventoryGUI : MonoBehaviour
     {
         GameObject obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 
-        Destroy(itemObject.transform.GetChild(0).gameObject);
+        if (itemObject.transform.childCount == 1) // if ui object is shown
+            Destroy(itemObject.transform.GetChild(0).gameObject);
+
         Instantiate(ItemDatabase.instance.GetItem(obj.GetComponent<TextMeshProUGUI>().text).itemObject, itemObject.transform);
     }
 
