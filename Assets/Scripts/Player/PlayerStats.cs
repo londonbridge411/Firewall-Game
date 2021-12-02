@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
-
+    
     //Player Stats
     public float health;
     public float stamina;
+    public float abilityAmount;
     public float iFrameTime;
     [SerializeField]    
     private bool canDamage = true;
@@ -21,11 +22,22 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (abilityAmount < 0)
+            abilityAmount = 0;
+        else if (abilityAmount > 100)
+            abilityAmount = 100;
+    }
+
     public void Damage(float dmg)
     {
         if (canDamage)
         {
-            health -= dmg;
+            if (GameManager.overclocked)
+                health -= dmg * 1.5f;   
+            else
+                health -= dmg;
             StartCoroutine(DamageCooldown());
         }      
     }
@@ -43,4 +55,5 @@ public class PlayerStats : MonoBehaviour
         yield return new WaitForSeconds(1);
         canDamage = true;
     }
+
 }

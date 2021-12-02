@@ -16,6 +16,7 @@ public class BHPattern : ScriptableObject
     public bool canTrack;
     public bool hasNextPattern;
     public BHPattern nextPattern;
+    public Rigidbody rb;
 
     public bool isTracking;
 
@@ -26,6 +27,7 @@ public class BHPattern : ScriptableObject
     public bool inverse;
 
     //tracking, spiral, 2nd pattern //rotation lerp for spiral
+
 
     public enum PatternType
     {
@@ -60,16 +62,18 @@ public class BHPattern : ScriptableObject
 
         for (int i = 0; i < numberOfBullets; i++)
         {
-            BHBullet bulletObj = Instantiate(bullet, parent.transform.position, Quaternion.identity);
-            bulletObj.transform.Rotate(new Vector3(0, i * angle + rotation, 0));
+            //BHBullet bulletObj = Instantiate(bullet, parent.transform.position, Quaternion.identity);
+            GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(new Vector3(0, i * angle, 0)));
+            //bulletObj.transform.Rotate(new Vector3(0, i * angle + rotation, 0));
+
             Vector3 AiPosition = bulletObj.transform.position;
             if (canTrack)
             {
-                bulletObj.SetTracking(true);
+                bulletObj.GetComponent<BHBullet>().SetTracking(true);
 }
             else
             {
-                bulletObj.SetTracking(false);
+                bulletObj.GetComponent<BHBullet>().SetTracking(false);
             }
         }
     }
@@ -83,15 +87,15 @@ public class BHPattern : ScriptableObject
             Vector3 currentAngle = new Vector3(0, i * angle + rotation, 0);
             if (currentAngle.y > 45 + rotation && currentAngle.y < 315 + rotation) //The plus 45 is a skew to line everything up
             {
-                BHBullet bulletObj = Instantiate(bullet, parent.transform.position, Quaternion.identity);
+                GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(new Vector3(0, i * angle, 0)));
                 bulletObj.transform.Rotate(currentAngle);
                 if (canTrack)
                 {
-                    bulletObj.SetTracking(true);
+                    bulletObj.GetComponent<BHBullet>().SetTracking(true);
                 }
                 else
                 {
-                    bulletObj.SetTracking(false);
+                    bulletObj.GetComponent<BHBullet>().SetTracking(false);
                 }
             }       
         }
@@ -103,16 +107,16 @@ public class BHPattern : ScriptableObject
 
         for (int i = 0; i < numberOfBullets; i++)
         {
-            BHBullet bulletObj = Instantiate(bullet, parent.transform.position, Quaternion.identity);
-            bulletObj.transform.Rotate(new Vector3(0, i * angle + rotation, 0));
+            GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(new Vector3(0, i * angle + rotation, 0)));
+
             Vector3 AiPosition = bulletObj.transform.position;
             if (canTrack)
             {
-                bulletObj.SetTracking(true);
+                bulletObj.GetComponent<BHBullet>().SetTracking(true);
             }
             else
             {
-                bulletObj.SetTracking(false);
+                bulletObj.GetComponent<BHBullet>().SetTracking(false);
             }
         }
         if (inverse)
@@ -132,15 +136,15 @@ public class BHPattern : ScriptableObject
             Vector3 currentAngle = new Vector3(0, i * angle + rotation, 0);
             if (currentAngle.y > 45 + rotation && currentAngle.y < 315 + rotation) //The plus 45 is a skew to line everything up
             {
-                BHBullet bulletObj = Instantiate(bullet, parent.transform.position, Quaternion.identity);
-                bulletObj.transform.Rotate(currentAngle);
+                GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(currentAngle));
+                //bulletObj.transform.Rotate(currentAngle);
                 if (canTrack)
                 {
-                    bulletObj.SetTracking(true);
+                    bulletObj.GetComponent<BHBullet>().SetTracking(true);
                 }
                 else
                 {
-                    bulletObj.SetTracking(false);
+                    bulletObj.GetComponent<BHBullet>().SetTracking(false);
                 }
 
             }

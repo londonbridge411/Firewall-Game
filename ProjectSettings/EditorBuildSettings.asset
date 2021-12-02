@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/B.unity
     guid: e8ee84d1c30702a418d0a7eed2c2ebcf
+  - enabled: 1
+    path: Assets/Scenes/SubsceneTesting.unity
+    guid: 82d33cf8483b6094ea5a436d38d4b30e
   m_configObjects: {}

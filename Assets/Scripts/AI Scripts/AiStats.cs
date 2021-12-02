@@ -2,81 +2,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine.AI;
 using UnityEngine;
+using bowen.AI;
 
 public class AiStats : MonoBehaviour
 {
-    public float Health { get; private set; }
-    public float Damage { get; private set; } //Physical Damage, not projectile.
-    public float Critdamage { get; private set; }
-    public float Critchance { get; private set; }
-    public int Points { get; private set; }
+    public float Health;
+    public float Damage;
+    public float Critdamage;
+    public float Critchance;
+    public int Points;
 
-    public enum EnemyType
-    {
-        Pawn,
-        Bishop,
-        Knight
-    }
+    public Vector3 startPosition { get; private set; }
+    private Quaternion startRotation;
+
+    //private Vector3 startPosition;
+    private float _health;
 
     public enum EnemyRank
     {
         Red,
         Orange,
         Yellow,
-
+        Boss,
     }
-    public EnemyType type;
+
     public EnemyRank rank;
 
     private void Start()
     {
-        //Yellow should be roughly 2x has powerful has red.
-        switch (type)
-        {
-            case EnemyType.Pawn:
-                switch (rank)
-                {
-                    case EnemyRank.Red:
-                        SetStats(20, 10, 15, 15, 10);
-                        break;
-                    case EnemyRank.Orange:
-                        SetStats(30, 15, 20, 15, 30);
-                        break;
-                    case EnemyRank.Yellow:
-                        SetStats(50, 20, 30, 15, 75);
-                        break;
-                }
-                break;
-            case EnemyType.Bishop:
-                switch (rank)
-                {
-                    case EnemyRank.Red:
-                        SetStats(50, 15, 35, 10, 30);
-                        break;
-                    case EnemyRank.Orange:
-                        SetStats(70, 20, 40, 10, 75);
-                        break;
-                    case EnemyRank.Yellow:
-                        SetStats(90, 30, 45, 12.5f, 150);
-                        break;
-                }
-                break;
-            case EnemyType.Knight:
-                switch (rank)
-                {
-                    case EnemyRank.Red:
-                        SetStats(65, 25, 40, 10, 50);
-                        break;
-                    case EnemyRank.Orange:
-                        SetStats(80, 35, 50, 15, 100);
-                        break;
-                    case EnemyRank.Yellow:
-                        SetStats(120, 45, 60, 25f, 200);
-                        break;
-                }
-                break;
-        }
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+        _health = Health;
     }
 
     private void Update()
@@ -87,17 +45,16 @@ public class AiStats : MonoBehaviour
             {
                 GetComponentInParent<ItemDrop>().Drop();
             }
-            GetComponentInParent<ObjectManager>().DisableObject();
-        }
-    }
 
-    private void SetStats(float health, float damage, float critdamage, float critrate, int points)
-    {
-        Health = health;
-        Damage = damage;
-        Critdamage = critdamage;
-        Critchance = critrate;
-        Points = points;
+            if (rank == EnemyRank.Boss)
+            {
+                GetComponentInParent<ObjectManager>().DisableObject();
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     public void PrintStats()
@@ -107,7 +64,18 @@ public class AiStats : MonoBehaviour
 
     public void TakeDamage(float dmgValue)
     {
-        Health -= dmgValue;
+        if (GameManager.overclocked)
+            Health -= dmgValue* 2f;
+        else
+            Health -= dmgValue;
+    }
+
+    public void ResetAI()
+    {
+        gameObject.SetActive(true);
+        gameObject.transform.position = startPosition;
+        gameObject.transform.rotation = startRotation;
+        Health = _health;
     }
 }
 

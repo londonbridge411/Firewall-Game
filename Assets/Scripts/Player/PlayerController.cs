@@ -10,35 +10,41 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Volume volume;
     MotionBlur motionBlur;
-
+    public float rayCastHeightOffset;
     public static PlayerController instance;
-    //[SerializeField]
-    public Stamina_Bar stamina_Bar;
-    [SerializeField]
-    float moveSpeed = 15;
-    public float sprintSpeed = 50;
+    public LayerMask groundLayer;
+    public bool isGrounded;
+
+    [Header("Movement")]
+    public float moveSpeed = 20f;
     public bool hitZero;
-    Rigidbody rb;
-    public LayerMask raycastMask;
-
-    //Dash Stuff
-    public float dashDuration;
-    bool isDashing;
     public bool canMove;
-    public GameObject punchObj;
-    public GameObject flashlight;
-    Vector3 movementDirection;
+    Rigidbody rb;
 
-    //For Interactables
+    //public LayerMask raycastMask;
+
+    [Header("Dash")]
+    public float dashSpeed = 100;
+    public float dashDuration;
+    [SerializeField] bool isDashing;
+
+    [Header("Interactables")]
     bool byElevator;
     GameObject elevator; //nearest elevator
-
     bool byInteractable;
     public GameObject interactable;
 
+    [Header("Other")]
+    public Stamina_Bar stamina_Bar;
+    public GameObject flashlight;
+    Vector3 movementDirection;
+
+
+    private bool hasLoaded = false;
+
     void Awake()
     {
-        
+        //upperRay.transform.position = new Vector3(upperRay.transform.position.x, stepHeight, upperRay.transform.position.z);
     }
 
     // Start is called before the first frame update
@@ -55,21 +61,35 @@ public class PlayerController : MonoBehaviour
         stamina_Bar = FindObjectOfType<Stamina_Bar>();
         GetComponent<GhostTrail>().enabled = false;
         rb = GetComponent<Rigidbody>();
-        SaveLoadSystem.instance.Load();
+        //StartCoroutine(Load());
 
         if (volume.profile.TryGet(out MotionBlur blur))
         {
             motionBlur = blur;
         }
+
+        //DO NOT REMOVE!
+        SaveLoadSystem.instance.Load();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /// Doesn't make sense why this works, but without it the game doesn't load correctly.
+        /// Also you can't get rid of the load in the start method otherwise it doesn't work.
+        /// No clue wtf is happening.
+        if (hasLoaded == false)
+        {
+            SaveLoadSystem.instance.Load();
+            hasLoaded = true;
+        }
+
         if (MenuControl.instance.isPaused)
         {
             return;
         }
+
+        ProcessInputs();
 
         if (Input.GetButtonDown("Flashlight"))
         {
@@ -84,11 +104,6 @@ public class PlayerController : MonoBehaviour
             stamina_Bar = FindObjectOfType<Stamina_Bar>();
         }
 
-        RotatePlayer();
-
-        //Gets direction of key input
-        movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        
         //Quick Punch
 
         if (stamina_Bar.MAX_STAMINA < 20)
@@ -101,20 +116,15 @@ public class PlayerController : MonoBehaviour
             PlayerStats.instance.health = 100;
         }
 
-        //Movement
-        if (canMove)
-            transform.position += new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed, 0, Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
-
         //Stamina and Dash Control
         if (PlayerStats.instance.stamina <= 0)
         {
             hitZero = true;
         }
-
         else if (hitZero == false)
         {
             //Dash
-            if (Input.GetButtonDown("Dash") && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+            if (Input.GetButtonDown("Dash") && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && canMove)
             {
                 isDashing = true;
                 StartCoroutine(PlayerStats.instance.IFrames());
@@ -123,7 +133,10 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                moveSpeed = 20;
+                if (GameManager.overclocked)
+                    moveSpeed = 45f;
+                else
+                    moveSpeed = 20;
                 //Stamina Regen
                 if (PlayerStats.instance.stamina < stamina_Bar.MAX_STAMINA)
                 {
@@ -147,6 +160,9 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Move();
+        RotatePlayer();
+
         if (isDashing)
         {
             StartCoroutine(MotionBlurLerp(0, 1, 0.15f));
@@ -207,17 +223,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void InteractableControl()
-    {
-        if (byInteractable)
-        {
-            if (Input.GetButtonDown("Interact"))
-            {
-                //interactable.GetComponent<Elevator>().Move();
-            }
-        }
-    }
-
     void RotatePlayer()
     {
         var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
@@ -229,7 +234,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator DashTimer(float t)
     {
         isDashing = true;
-        rb.velocity = movementDirection.normalized * sprintSpeed;
+        rb.velocity = movementDirection.normalized * dashSpeed;
         Physics.SyncTransforms();
         yield return new WaitForSeconds(t);
         isDashing = false;
@@ -251,5 +256,19 @@ public class PlayerController : MonoBehaviour
         }
 
         motionBlur.intensity.value = b;
+    }
+
+    void ProcessInputs()
+    {
+        float mH = Input.GetAxisRaw("Horizontal");
+        float mV = Input.GetAxisRaw("Vertical");
+
+        movementDirection = new Vector3(mH, 0, mV).normalized;
+    }
+
+    void Move()
+    {
+        if (canMove)
+            rb.velocity = new Vector3(movementDirection.x * moveSpeed, rb.velocity.y, movementDirection.z * moveSpeed);
     }
 }

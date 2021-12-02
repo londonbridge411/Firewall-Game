@@ -57,6 +57,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -99,7 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7002f7defdb20c14386f4e296ecf722f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  Health: 65
+  Damage: 25
+  Critdamage: 40
+  Critchance: 10
+  Points: 50
   rank: 0
 --- !u!195 &2325219403797614701
 NavMeshAgent:
@@ -222,7 +227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDisabled: 0
-  child: {fileID: 2325219403797614705}
 --- !u!114 &7633106895875684275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +293,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

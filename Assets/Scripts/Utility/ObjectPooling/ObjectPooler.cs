@@ -64,6 +64,7 @@ public class ObjectPooler : MonoBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
         objectToSpawn.SetActive(true);
+
         objectToSpawn.transform.position = pos;
         objectToSpawn.transform.rotation = rot;
 
@@ -86,8 +87,24 @@ public class ObjectPooler : MonoBehaviour
 
     public IEnumerator Despawn(GameObject obj, float time)
     {
-        yield return new WaitForSeconds(time);
+        float startTime = 0;
+
+        while (startTime < time)
+        {
+            if (!obj.tag.Equals("Dash"))
+            {
+                while (GameManager.stoppedTime)
+                {
+                    yield return new WaitUntil(() => GameManager.stoppedTime);
+                }
+            }
+
+            startTime += Time.deltaTime;
+            yield return null;          
+        }
+
         obj.SetActive(false);
+        //yield return new WaitForSeconds(time);       
     }
 
     public GameObject GetObject(string tag)

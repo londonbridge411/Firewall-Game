@@ -9,11 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4473331736136934078}
-  - component: {fileID: 836682138179427591}
-  - component: {fileID: 6425654153096258145}
+  - component: {fileID: 2503693939918661471}
+  - component: {fileID: 594955403611038668}
+  - component: {fileID: 4375730312111893294}
+  - component: {fileID: 8884365071600025504}
+  - component: {fileID: 1878191819207467717}
+  - component: {fileID: 8368668059183277289}
+  - component: {fileID: 6438485182993703165}
+  - component: {fileID: 6385278595618492331}
   m_Layer: 0
   m_Name: Bishop II
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,129 +31,34 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336967422077649783}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.3, y: 2.87, z: -21.2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.808807, y: 4.808807, z: 4.808807}
   m_Children:
-  - {fileID: 519690397969966788}
+  - {fileID: 1283799573418262160}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &836682138179427591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336967422077649783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d489df09dcc58614d99a64d603842f39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 
---- !u!114 &6425654153096258145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336967422077649783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51ca66ff3a36ebe4b96aa0469a6224e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDisabled: 0
-  child: {fileID: 3804178008218318149}
---- !u!1 &3555751289622314260
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1283799573418262160}
-  m_Layer: 0
-  m_Name: firePoint (Bishop)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1283799573418262160
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3555751289622314260}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.062}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 519690397969966788}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3804178008218318149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519690397969966788}
-  - component: {fileID: 3581870406295112134}
-  - component: {fileID: 1966385004233444693}
-  - component: {fileID: 3436813857841251767}
-  - component: {fileID: 7512055313093710137}
-  - component: {fileID: 656146713160305756}
-  - component: {fileID: 7433419011973761648}
-  - component: {fileID: 5355250955579723364}
-  - component: {fileID: 5446722746885923122}
-  m_Layer: 0
-  m_Name: Bishop II
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519690397969966788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1283799573418262160}
-  m_Father: {fileID: 4473331736136934078}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3581870406295112134
+--- !u!33 &2503693939918661471
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1966385004233444693
+--- !u!23 &594955403611038668
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -178,26 +89,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3436813857841251767
+--- !u!65 &4375730312111893294
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7512055313093710137
+--- !u!54 &8884365071600025504
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   serializedVersion: 2
   m_Mass: 20
   m_Drag: 0
@@ -207,13 +118,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!195 &656146713160305756
+--- !u!195 &1878191819207467717
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
@@ -229,45 +140,51 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &7433419011973761648
+--- !u!135 &8368668059183277289
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 11
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5355250955579723364
+--- !u!114 &6438485182993703165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7002f7defdb20c14386f4e296ecf722f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  Health: 0
+  Damage: 20
+  Critdamage: 40
+  Critchance: 10
+  Points: 75
   rank: 1
---- !u!114 &5446722746885923122
+--- !u!114 &6385278595618492331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804178008218318149}
+  m_GameObject: {fileID: 336967422077649783}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a851c423b42fc0e43a8f939264a5ced8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityReturn: 20
+  canMove: 0
   target: {fileID: 0}
   firePoint: {fileID: 1283799573418262160}
   magicAttack: {fileID: 3095245558823172379, guid: c6e38e36f3c564a4293c92a7806e1529, type: 3}
@@ -277,3 +194,33 @@ MonoBehaviour:
   damageCooldown: 2
   damageTimer: 0
   currentState: 0
+--- !u!1 &3555751289622314260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283799573418262160}
+  m_Layer: 0
+  m_Name: firePoint (Bishop)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283799573418262160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555751289622314260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.062}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4473331736136934078}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

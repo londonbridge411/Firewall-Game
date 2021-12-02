@@ -15,7 +15,7 @@ public class MainMenu : Menu
     public void Continue()
     {
        // MenuControl.instance.CloseMenu();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(7);
     }
 
     // Update is called once per frame

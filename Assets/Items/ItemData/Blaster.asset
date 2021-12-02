@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemObject: {fileID: 8344363340251495751, guid: 56acad7e78437e04ba68910e6d7af0fb, type: 3}
   itemName: Blaster
-  itemQuantity: 0
+  type: 1
   itemLore: AHAHAHHAHA

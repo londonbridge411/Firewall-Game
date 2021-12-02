@@ -11,6 +11,8 @@ namespace bowen.BulletHell
         //public Quaternion rotation;
 
         public bool onCooldown;
+        public bool canFire;
+        public float tempCooldownTime;
         //bool SwitchPattern() (set parent)
 
         private void Update()
@@ -20,7 +22,7 @@ namespace bowen.BulletHell
                 currentPattern.SetParent(gameObject);
             }
 
-            if (!onCooldown)
+            if (!onCooldown && canFire)
             {
                 currentPattern.Fire();
                 StartCoroutine(Cooldown());
@@ -29,9 +31,38 @@ namespace bowen.BulletHell
 
         private IEnumerator Cooldown()
         {
+            float startTime = 0;
             onCooldown = true;
-            yield return new WaitForSeconds(currentPattern.cooldownTime);
+
+            while (startTime < currentPattern.cooldownTime)
+            {
+                while (GameManager.stoppedTime)
+                {
+                    yield return new WaitUntil(() => GameManager.stoppedTime);
+                }
+
+                startTime += Time.deltaTime;
+                yield return null;
+            }
             onCooldown = false;
+        }
+
+        private void Start()
+        {
+            GameManager.instance.OnTimeStop += OnTimeStop;
+            GameManager.instance.OnTimeResume += OnTimeResume;
+
+            canFire = true;
+        }
+
+        void OnTimeStop()
+        {
+            canFire = false;
+        }
+
+        void OnTimeResume()
+        {
+            canFire = true;
         }
     }
 }

@@ -39,6 +39,11 @@ public class Elevator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isTraveling)
+            PlayerController.instance.canMove = false;
+        else
+            PlayerController.instance.canMove = true;
+
         if (Vector3.Distance(transform.position, posA) < 1)
             atPointA = true;
         else
@@ -48,13 +53,6 @@ public class Elevator : MonoBehaviour
             atPointB = true;
         else
             atPointB = false;
-
-        if (isTraveling)
-            PlayerController.instance.canMove = false;
-        else
-            PlayerController.instance.canMove = true;
-
-
     }
 
     private void OnTriggerStay(Collider col)
@@ -102,15 +100,21 @@ public class Elevator : MonoBehaviour
 
     IEnumerator Move(Vector3 point)
     {
+
+
         Vector3 pos = transform.position;
         isTraveling = true;
         //Vector3 pos = transform.position - bottom.position;
         for (float t = 0; t < 1; t += Time.deltaTime / calculatedTime)
         {
+            while (GameManager.stoppedTime)
+            {
+                yield return new WaitUntil(() => GameManager.stoppedTime);
+            }
             transform.position = Vector3.Lerp(pos, point, t);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         isTraveling = false;
-    }
 
+    }
 }

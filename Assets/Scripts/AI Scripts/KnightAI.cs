@@ -7,8 +7,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(AiStats), typeof(NavMeshAgent))]
 public class KnightAI : AI
 {
-    private AiStats stats;
     private NavMeshAgent nav;
+    private AiStats stats;
     public Transform target;
     [SerializeField] private GameObject shield;
     //Ranges
@@ -48,7 +48,7 @@ public class KnightAI : AI
     // Start is called before the first frame update
     void Start()
     {
-        nav = GetComponent<NavMeshAgent>();
+        nav = gameObject.GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         shield = GetComponentInChildren<Shield>().gameObject;
         currentState = State.Idle;
@@ -59,6 +59,9 @@ public class KnightAI : AI
         prevTime = timer;
         timerOn = false;
         StartCoroutine(HalfHealthFix());
+
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
     }
 
     // Update is called once per frame
@@ -220,4 +223,7 @@ public class KnightAI : AI
         }
     }
 
+    void OnTimeStop() => nav.enabled = false;
+
+    void OnTimeResume() => nav.enabled = true;
 }

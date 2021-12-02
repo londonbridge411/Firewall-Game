@@ -12,7 +12,7 @@ namespace bowen.Interactable
         {
             if (byInteractable)
             {
-                if (Input.GetButtonDown("Interact"))
+                if (Input.GetButtonDown("Interact") && transform.GetChild(0).gameObject.activeSelf)
                     Interact();
             }
         }

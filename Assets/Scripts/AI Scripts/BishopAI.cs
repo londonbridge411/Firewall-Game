@@ -50,10 +50,18 @@ public class BishopAI : AI
         nav = GetComponent<NavMeshAgent>();
         previousTime = cooldownTimer;
         previousDMGTimer = damageCooldown;
+
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
     }
 
     private void Update()
     {
+        if (GameManager.stoppedTime)
+        {
+            return;
+        }
+
         float distance = Vector3.Distance(gameObject.transform.position, PlayerController.instance.transform.position);
         //Shooting
         if (timer)
@@ -144,7 +152,7 @@ public class BishopAI : AI
 
     public override void Attack()
     {
-        Instantiate(magicAttack, firePoint.position, firePoint.rotation);
+        ObjectPooler.instance.SpawnFromPool("Bishop 1 Attack", firePoint.position, firePoint.rotation);
         timer = true;
     }
 
@@ -177,5 +185,9 @@ public class BishopAI : AI
         Gizmos.DrawWireSphere(gameObject.transform.position, attackRange);
         Gizmos.DrawWireSphere(gameObject.transform.position, noticeRange);
     }
+
+    void OnTimeStop() => nav.enabled = false;
+
+    void OnTimeResume() => nav.enabled = true;
 }
 

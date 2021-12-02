@@ -14,35 +14,27 @@ public class Blast : MonoBehaviour, IPooledObject
     public GameObject blast;
     public float force;
     public float radius;
+
+    private Vector3 resumeVelocity;
     private List<ContactPoint> cp = new List<ContactPoint>();
 
-    /*private void Awake()
-    {
-        //instance = this;
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }*/
-
     // Start is called before the first frame update
-    public void OnObjectSpawn()
+    private void Start()
     {
-        print("Shot bullet");
-        rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
-        StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 3));
-
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnObjectSpawn()
     {
+        rb = GetComponent<Rigidbody>();
+
+        if (!GameManager.stoppedTime)
+        {
+            rb.isKinematic = false;
+            rb.velocity = transform.forward * speed;
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 3));
+        }
 
     }
 
@@ -102,6 +94,23 @@ public class Blast : MonoBehaviour, IPooledObject
             }
         }
         Destroy(blastEffect, 5);
+    }
+
+    void OnTimeStop()
+    {
+        resumeVelocity = rb.velocity;
+    }
+
+    void OnTimeResume()
+    {
+        rb.isKinematic = false;
+        if (resumeVelocity == Vector3.zero)
+            rb.velocity = transform.forward * speed;
+        else
+            rb.velocity = resumeVelocity;
+
+        if (gameObject.activeSelf)
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 3));
     }
 }
 

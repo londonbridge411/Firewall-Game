@@ -10,19 +10,43 @@ public class PistolBulletScript : MonoBehaviour, IPooledObject
     public Rigidbody rb;
     List<ContactPoint> cp = new List<ContactPoint>();
 
+    private Vector3 resumeVelocity;
+
+    void Start()
+    {
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
+    }
+
+    void OnTimeStop()
+    {
+        resumeVelocity = rb.velocity;
+    }
+
+    void OnTimeResume()
+    {
+        rb.isKinematic = false;
+        if (resumeVelocity == Vector3.zero)
+            rb.velocity = transform.forward * speed;
+        else
+            rb.velocity = resumeVelocity;
+        if (gameObject.activeSelf)
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 1));
+    }
+
     // Start is called before the first frame update
     public void OnObjectSpawn()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
-        StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 1));
+
+        if (!GameManager.stoppedTime)
+        {
+            rb.isKinematic = false;
+            rb.velocity = transform.forward * speed;
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 1));
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnCollisionEnter(Collision collision)
     {

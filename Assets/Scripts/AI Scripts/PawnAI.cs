@@ -25,14 +25,18 @@ public class PawnAI : AI
     [SerializeField] State currentState;
     private void Start()
     {
-        nav = this.GetComponent<NavMeshAgent>();
+        nav = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        stats = this.GetComponent<AiStats>();
+        stats = GetComponent<AiStats>();
         previousTime = cooldownTimer;
+
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
     }
     
     private void Update()
     {
+
         //Damage Timer
         if (timer)
         {
@@ -90,7 +94,7 @@ public class PawnAI : AI
         {
             try
             {
-                if (tag == "Enemy" && col.gameObject.GetComponent<AiStats>().type.ToString() == "Pawn")
+                if (tag == "Enemy")
                 {
                     col.GetComponent<PawnAI>().currentState = State.Follow;
                 }
@@ -107,4 +111,8 @@ public class PawnAI : AI
     {
         Gizmos.DrawWireSphere(gameObject.transform.position, radius);
     }
+
+    void OnTimeStop() => nav.enabled = false;
+
+    void OnTimeResume() => nav.enabled = true;
 }

@@ -49,7 +49,7 @@ MonoBehaviour:
     size: 10
   - tag: GhostPistol
     prefab: {fileID: 7549370382679685986, guid: cca8fe712763b8d4885db51b775bbd45, type: 3}
-    size: 10
+    size: 8
   - tag: GhostBlaster
     prefab: {fileID: 7215583569730033419, guid: 50b60888d813293479fec74a14ebcd60, type: 3}
     size: 10
@@ -70,10 +70,16 @@ MonoBehaviour:
     size: 2
   - tag: PistolBullet
     prefab: {fileID: 6844627771600418801, guid: 5cea78ad0ef017b4fae8dee4da290296, type: 3}
-    size: 3
+    size: 10
   - tag: Bullet
     prefab: {fileID: 6844627771600418801, guid: d10107c9986d7b64584675c0438c0026, type: 3}
     size: 50
   - tag: Shell
     prefab: {fileID: 6844627771600418801, guid: 6002b3795d1cf73438acef8715d557e1, type: 3}
     size: 100
+  - tag: Bishop 1 Attack
+    prefab: {fileID: 3095245558823172379, guid: c6e38e36f3c564a4293c92a7806e1529, type: 3}
+    size: 20
+  - tag: BH Small Bullet
+    prefab: {fileID: 2074678588447958052, guid: 9a3e4ca827430b3409a2b03d5df832d4, type: 3}
+    size: 200

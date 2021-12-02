@@ -57,6 +57,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -150,7 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7002f7defdb20c14386f4e296ecf722f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  Health: 20
+  Damage: 10
+  Critdamage: 15
+  Critchance: 15
+  Points: 10
   rank: 0
 --- !u!114 &183696333533758872
 MonoBehaviour:
@@ -229,7 +234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDisabled: 0
-  child: {fileID: 183696333533758873}
 --- !u!114 &688813885840725325
 MonoBehaviour:
   m_ObjectHideFlags: 0

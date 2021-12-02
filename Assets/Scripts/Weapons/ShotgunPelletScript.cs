@@ -14,9 +14,15 @@ public class ShotgunPelletScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
-        //StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 1));
-        Destroy(gameObject, 1);
+
+        if (GameManager.stoppedTime)
+            StartCoroutine(StopTime());
+        else
+        {
+            rb.isKinematic = false;
+            rb.velocity = transform.forward * speed;
+            StartCoroutine(CustomDestroy(1));
+        }
     }
 
     // Update is called once per frame
@@ -60,5 +66,31 @@ public class ShotgunPelletScript : MonoBehaviour
                 shield.GetComponentInChildren<Shield>().TakeDamage(damage);
             }
         }
+    }
+
+    public IEnumerator CustomDestroy(float time)
+    {
+        float startTime = 0;
+
+        while (startTime < time)
+        {
+            while (GameManager.stoppedTime)
+            {
+                yield return new WaitUntil(() => GameManager.stoppedTime);
+            }
+
+            startTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);    
+    }
+
+    //I have to do it this way otherwise the whole time stop freeze screws up
+    IEnumerator StopTime()
+    {
+        yield return new WaitWhile(() => GameManager.stoppedTime);
+        rb.velocity = transform.forward * speed;
+        StartCoroutine(CustomDestroy(1));
     }
 }

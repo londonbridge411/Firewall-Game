@@ -19,7 +19,7 @@ public class CpConfirmationMenu : Menu
 
     public void LoadLastPoint()
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
         //InventoryManager.instance.inventory.Clear();
         SaveLoadSystem.instance.Load();
         MenuControl.instance.SwitchMenu(MenuControl.instance.lastMenu);

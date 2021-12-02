@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BHBullet : MonoBehaviour
+public class BHBullet : MonoBehaviour, IPooledObject
 {
     public float damage = 5f;
+    public string objectPooledName;
     public float speed;
+    private Vector3 resumeVelocity;
     private Rigidbody rb;
     private bool tracking;
 
@@ -17,7 +19,7 @@ public class BHBullet : MonoBehaviour
         StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 1));
     }*/
 
-    public void Start()
+    /*public void Start()
     {
         
         rb = GetComponent<Rigidbody>();
@@ -25,7 +27,7 @@ public class BHBullet : MonoBehaviour
 
         if (tracking == false)
             Destroy(gameObject, 2f);
-    }
+    }*/
 
     private void Update()
     {
@@ -37,10 +39,16 @@ public class BHBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag.Equals("Wall"))
+        {                                               
+            ObjectPooler.instance.Despawn(gameObject);
+        }
+
         if (other.tag.Equals("Player"))
         {
             PlayerStats.instance.Damage(damage);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            ObjectPooler.instance.Despawn(gameObject);
         }
     }
 
@@ -86,9 +94,42 @@ public class BHBullet : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             yield return null;
-            Destroy(gameObject);
+            ObjectPooler.instance.Despawn(gameObject);
         }
-        print("Destroy ball");
-        
+        print("Destroy ball");  
+    }
+
+    private void Start()
+    {
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
+    }
+    //Do this stuff for stopped Objects
+    public void OnObjectSpawn()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        if (!GameManager.stoppedTime)
+        {
+            rb.isKinematic = false;
+            rb.velocity = transform.forward * speed;
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 2));
+        }
+    }
+
+    void OnTimeStop()
+    {
+        resumeVelocity = rb.velocity;
+    }
+
+    void OnTimeResume()
+    {
+        rb.isKinematic = false;
+        if (resumeVelocity == Vector3.zero)
+            rb.velocity = transform.forward * speed;
+        else
+            rb.velocity = resumeVelocity;
+        if (gameObject.activeSelf)
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 2));
     }
 }

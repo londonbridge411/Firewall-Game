@@ -42,7 +42,7 @@ public class InventoryGUI : MonoBehaviour
     {
         GameObject newItem = Instantiate(emptyItemPrefab, content);
         newItem.GetComponent<TextMeshProUGUI>().text = item.itemName;
-        newItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.itemQuantity.ToString();
+        newItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.type.ToString();
     }
 
     public void Clear()
@@ -57,7 +57,7 @@ public class InventoryGUI : MonoBehaviour
     {
         for (int i = 0; i < content.childCount; i++)
         {
-            content.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = InventoryManager.instance.inventory[i].itemQuantity.ToString();
+            content.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = InventoryManager.instance.inventory[i].type.ToString();
         }
     }
 

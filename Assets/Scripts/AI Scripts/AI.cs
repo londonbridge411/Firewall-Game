@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 using UnityEngine;
 
 namespace bowen.AI
@@ -7,6 +8,14 @@ namespace bowen.AI
     //Base AI Class
     public abstract class AI : MonoBehaviour
     {
+        public float abilityReturn;
+        public bool canMove;
+
+        private void Update()
+        {
+            /*if (GameManager.stoppedTime)
+                return;*/
+        }
 
         public float DamageRandomizer(float baseDMG, float critDMG, float critRate)
         {
@@ -26,12 +35,14 @@ namespace bowen.AI
             }
 
         }
+
         public abstract void Follow();
         public abstract void Attack();
 
         public void OnDisable()
         {
             Score.instance.AddPoints(GetComponent<AiStats>().Points);
+            PlayerStats.instance.abilityAmount += abilityReturn;
         }
 
         public void Rotate(Transform target, float turnSpeed)
@@ -39,6 +50,17 @@ namespace bowen.AI
             Vector3 direction = (target.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+        }
+
+        /// <summary>
+        /// Sets the AI's destination to it's original position.
+        /// </summary>
+        public void ReturnPosition()
+        {
+            if (gameObject.GetComponent<NavMeshAgent>())
+            {
+                gameObject.GetComponent<NavMeshAgent>().SetDestination(gameObject.GetComponent<AiStats>().startPosition);
+            }
         }
 
         #region Not Finished

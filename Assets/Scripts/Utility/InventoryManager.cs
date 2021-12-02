@@ -26,16 +26,8 @@ public class InventoryManager : MonoBehaviour
 
     public void AddInventoryItem(InventoryItem item)
     {
-        if (inventory.Contains(item))
-        {
-            item.itemQuantity++;
-            InventoryGUI.instance.UpdateQuantity();
-        }
-        else
-        {
             inventory.Add(item);
             InventoryGUI.instance.AddItem(item);
-        }
     }
 
     public void ReloadInventory()

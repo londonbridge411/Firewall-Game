@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace bowen.Interactable
@@ -14,7 +15,7 @@ namespace bowen.Interactable
             if (!ItemDatabase.instance.ContainsItem(itemData.itemName))
             {
                 Debug.LogError(itemData.itemName + " not in database");
-                UnityEditor.EditorApplication.isPlaying = false;
+                EditorApplication.isPlaying = false;
             }
         }
 

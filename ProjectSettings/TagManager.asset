@@ -20,6 +20,7 @@ TagManager:
   - Elevator
   - Disappear
   - Window
+  - Dash
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - GroundLayer
   - 
   - HideInEditor
   - Player

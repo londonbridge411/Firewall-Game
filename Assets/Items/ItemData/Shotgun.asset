@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemObject: {fileID: 1762613313541531389, guid: b92af0c5c9cfb25428573eb2219083ae, type: 3}
   itemName: Shotgun
-  itemQuantity: 0
+  type: 1
   itemLore: AAAAAAASXZDASDASDASD

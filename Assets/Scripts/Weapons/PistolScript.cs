@@ -20,6 +20,11 @@ public class PistolScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.activeSelf)
+            PlayerController.instance.moveSpeed = 35f;
+        else
+            PlayerController.instance.moveSpeed = 25f;
+
         if (MenuControl.instance.isPaused)
         {
             return;
