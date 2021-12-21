@@ -52,35 +52,38 @@ public class CeilingCheck : MonoBehaviour
         //Material currentMaterial = renderer.material;
         if (obj.GetComponent<MeshRenderer>())
         {
-            Material currentMaterial = obj.GetComponent<MeshRenderer>().material;
+            //Material currentMaterial = obj.GetComponent<MeshRenderer>().material;
 
-            if (setTransparent)
+            foreach (Material currentMaterial in obj.GetComponent<MeshRenderer>().materials)
             {
-                for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
+                if (setTransparent)
                 {
-                    if (obj.tag.Equals("Window"))
-                        value = Mathf.Lerp(0.55f, 0f, t); //(0.55f, -0.05f
-                    else
-                        value = Mathf.Lerp(1f, 0f, t); //(1.05f, -0.05f
-                    currentMaterial.SetFloat("Vector1_74A4DCF8", value);
-                    yield return new WaitForFixedUpdate();
+                    for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
+                    {
+                        if (obj.tag.Equals("Window"))
+                            value = Mathf.Lerp(0.55f, 0f, t); //(0.55f, -0.05f
+                        else
+                            value = Mathf.Lerp(1f, 0f, t); //(1.05f, -0.05f
+                        currentMaterial.SetFloat("Vector1_74A4DCF8", value);
+                        yield return new WaitForFixedUpdate();
+                    }
                 }
-            }
-            else
-            {
-                for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
+                else
                 {
-                    if (obj.tag.Equals("Window"))
-                        value = Mathf.Lerp(0f, 0.55f, t);
-                    else
-                        value = Mathf.Lerp(0f, 1f, t);
-                    currentMaterial.SetFloat("Vector1_74A4DCF8", value);
-                    yield return new WaitForFixedUpdate();
+                    for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
+                    {
+                        if (obj.tag.Equals("Window"))
+                            value = Mathf.Lerp(0f, 0.55f, t);
+                        else
+                            value = Mathf.Lerp(0f, 1f, t);
+                        currentMaterial.SetFloat("Vector1_74A4DCF8", value);
+                        yield return new WaitForFixedUpdate();
+                    }
                 }
             }
         }
         else
-            yield return null;
+            yield return null;       
 
     }       
 }

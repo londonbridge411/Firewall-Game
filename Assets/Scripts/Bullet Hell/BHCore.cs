@@ -12,7 +12,6 @@ namespace bowen.BulletHell
 
         public bool onCooldown;
         public bool canFire;
-        public float tempCooldownTime;
         //bool SwitchPattern() (set parent)
 
         private void Update()

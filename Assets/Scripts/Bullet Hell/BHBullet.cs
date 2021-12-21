@@ -11,23 +11,26 @@ public class BHBullet : MonoBehaviour, IPooledObject
     private Rigidbody rb;
     private bool tracking;
 
-    /*// Start is called before the first frame update
+    private void Start()
+    {
+        //Subscribes the functions to Time Stop and Resume events.
+        GameManager.instance.OnTimeStop += OnTimeStop;
+        GameManager.instance.OnTimeResume += OnTimeResume;
+    }
+
     public void OnObjectSpawn()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
-        StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 1));
-    }*/
 
-    /*public void Start()
-    {
-        
-        rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
+        if (!GameManager.stoppedTime)
+        {
+            rb.isKinematic = false;
+            rb.velocity = transform.forward * speed;
 
-        if (tracking == false)
-            Destroy(gameObject, 2f);
-    }*/
+            //Despawns the object after 2 seconds in game.
+            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 2));
+        }
+    }
 
     private void Update()
     {
@@ -97,24 +100,6 @@ public class BHBullet : MonoBehaviour, IPooledObject
             ObjectPooler.instance.Despawn(gameObject);
         }
         print("Destroy ball");  
-    }
-
-    private void Start()
-    {
-        GameManager.instance.OnTimeStop += OnTimeStop;
-        GameManager.instance.OnTimeResume += OnTimeResume;
-    }
-    //Do this stuff for stopped Objects
-    public void OnObjectSpawn()
-    {
-        rb = GetComponent<Rigidbody>();
-
-        if (!GameManager.stoppedTime)
-        {
-            rb.isKinematic = false;
-            rb.velocity = transform.forward * speed;
-            StartCoroutine(ObjectPooler.instance.Despawn(gameObject, 2));
-        }
     }
 
     void OnTimeStop()

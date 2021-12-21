@@ -28,7 +28,7 @@ public class BHPattern : ScriptableObject
 
     //tracking, spiral, 2nd pattern //rotation lerp for spiral
 
-
+    
     public enum PatternType
     {
         Full, Half, Spiral, Burst
@@ -62,19 +62,13 @@ public class BHPattern : ScriptableObject
 
         for (int i = 0; i < numberOfBullets; i++)
         {
-            //BHBullet bulletObj = Instantiate(bullet, parent.transform.position, Quaternion.identity);
             GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(new Vector3(0, i * angle, 0)));
-            //bulletObj.transform.Rotate(new Vector3(0, i * angle + rotation, 0));
 
             Vector3 AiPosition = bulletObj.transform.position;
             if (canTrack)
-            {
                 bulletObj.GetComponent<BHBullet>().SetTracking(true);
-}
             else
-            {
                 bulletObj.GetComponent<BHBullet>().SetTracking(false);
-            }
         }
     }
 
@@ -89,14 +83,11 @@ public class BHPattern : ScriptableObject
             {
                 GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(new Vector3(0, i * angle, 0)));
                 bulletObj.transform.Rotate(currentAngle);
+
                 if (canTrack)
-                {
                     bulletObj.GetComponent<BHBullet>().SetTracking(true);
-                }
                 else
-                {
                     bulletObj.GetComponent<BHBullet>().SetTracking(false);
-                }
             }       
         }
     }
@@ -111,13 +102,9 @@ public class BHPattern : ScriptableObject
 
             Vector3 AiPosition = bulletObj.transform.position;
             if (canTrack)
-            {
                 bulletObj.GetComponent<BHBullet>().SetTracking(true);
-            }
             else
-            {
                 bulletObj.GetComponent<BHBullet>().SetTracking(false);
-            }
         }
         if (inverse)
             rotation -= strength;
@@ -139,13 +126,9 @@ public class BHPattern : ScriptableObject
                 GameObject bulletObj = ObjectPooler.instance.SpawnFromPool(bullet.objectPooledName, parent.transform.position, Quaternion.Euler(currentAngle));
                 //bulletObj.transform.Rotate(currentAngle);
                 if (canTrack)
-                {
                     bulletObj.GetComponent<BHBullet>().SetTracking(true);
-                }
                 else
-                {
                     bulletObj.GetComponent<BHBullet>().SetTracking(false);
-                }
 
             }
         }
