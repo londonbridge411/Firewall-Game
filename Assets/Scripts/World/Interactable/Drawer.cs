@@ -34,5 +34,15 @@ namespace bowen.Interactable
             else
                 Close();
         }
+
+        public void Lock()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Unlock()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

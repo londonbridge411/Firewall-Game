@@ -20,7 +20,6 @@ namespace bowen.StateMachine.XZ10
         }
         #endregion
 
-        string name = "Dash";
         Animator anim;
         [SerializeField] bool choice;
         public bool isDashing;
@@ -39,10 +38,9 @@ namespace bowen.StateMachine.XZ10
 
         }
 
-        public override string GetName() => name;
-
         public override void OnEnter()
         {
+            name = "Dash";
             anim.SetBool("STATE_dash", true);
             //Choose random direction/animation
             print("Entering " + name);
@@ -56,11 +54,6 @@ namespace bowen.StateMachine.XZ10
         }
 
         public override void SubStateChanger()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override GameObject GetGameObject()
         {
             throw new System.NotImplementedException();
         }

@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         {
             lensDistortion = newLensDistortion;
         }
+        SaveLoadSystem.instance.Load();
     }
 
     #region Time Stop
@@ -55,12 +56,20 @@ public class GameManager : MonoBehaviour
     public void StoppedTime()
     {
         print("Time has stopped.");
+        StartCoroutine(StoppedTimeLerp());
+        StartCoroutine(LensEffect());
+        StartCoroutine(CameraScript.instance.Shake(1.5f, 2, 1f));
         OnTimeStop?.Invoke();
     }
 
     public void ResumedTime()
     {
         print("Time has resumed.");
+        if (stoppedTime)
+        {
+            StartCoroutine(StoppedTimeRevert());
+            stoppedTime = false;
+        }
         OnTimeResume?.Invoke();
     }
 
@@ -131,6 +140,23 @@ public class GameManager : MonoBehaviour
         }
 
         colorAdjust.colorFilter.value = Color.white;
+    }
+    #endregion
+
+    #region LevelHandler
+    public delegate void OnLevelHandler();
+
+    public event OnLevelHandler OnLevelEnter;
+    public event OnLevelHandler OnLevelExit;
+
+    public void EnterLevel()
+    {
+        OnLevelEnter?.Invoke();
+    }
+
+    public void ExitLevel()
+    {
+        OnLevelExit?.Invoke();
     }
     #endregion
 }

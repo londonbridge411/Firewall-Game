@@ -26,7 +26,7 @@ public class RangedState : State
     }
     #endregion
 
-    string name = "Ranged";
+    
 
     [SerializeField]
     private subState currentSubState;
@@ -39,11 +39,12 @@ public class RangedState : State
 
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public override void OnEnter()
     {
+        name = "Ranged";
         throw new System.NotImplementedException();
     }
 
@@ -56,16 +57,4 @@ public class RangedState : State
     {
         throw new System.NotImplementedException();
     }
-
-    #region Unimplemented
-    public override GameObject GetGameObject()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override string GetName()
-    {
-        throw new System.NotImplementedException();
-    }
-    #endregion
 }

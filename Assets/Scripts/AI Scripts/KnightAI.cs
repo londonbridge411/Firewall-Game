@@ -200,7 +200,7 @@ public class KnightAI : AI
     IEnumerator HalfHealthFix()
     {
         yield return new WaitForSeconds(0.000001f);
-        halfHealth = (stats.Health / 2);
+        //halfHealth = (stats.Health / 2);
     }
 
     IEnumerator AttackCooldown()

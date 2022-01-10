@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(PlayerStats.instance.IFrames());
                 GetComponent<GhostTrail>().enabled = true;
                 PlayerStats.instance.stamina -= 20f;
+                AudioManager.instance.PlayOneShot("Dash");
             }
             else
             {

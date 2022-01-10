@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace bowen.StateMachine
 {
-    public class StateMachine : MonoBehaviour //extends to HFSM
+    public class StateMachine : MonoBehaviour
     {
         public State currentState;
         State previousState;
@@ -13,15 +13,15 @@ namespace bowen.StateMachine
 
         private void Start()
         {
-
+            currentState.Execute();
         }
 
         #region Getters and Setters
-        public string GetName() => currentState.GetName();
+        public string GetName() => currentState.name;
 
         private void Update()
         {
-            State = GetName();           
+            State = GetName();          
         }
 
         public void DefaultState(State state)
@@ -32,12 +32,12 @@ namespace bowen.StateMachine
 
         public void PrintState()
         {
-            print(currentState.GetName());
+            print(currentState.name);
         }
 
         void PrintPreviousState()
         {
-            print(previousState.GetName());
+            print(previousState.name);
         }
         #endregion
 

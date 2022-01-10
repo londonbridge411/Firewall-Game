@@ -27,7 +27,7 @@ namespace bowen.StateMachine.XZ10
         #endregion
 
         public static BattleState instance;
-        string name = "Battle";
+
 
         [SerializeField]
         private subState currentSubState;
@@ -39,6 +39,7 @@ namespace bowen.StateMachine.XZ10
 
         private void Start()
         {
+            name = "Battle";
             //gameObject.SetActive(false);
             ai = XZ10Script.instance;
             anim = ai.GetComponent<Animator>();
@@ -46,11 +47,6 @@ namespace bowen.StateMachine.XZ10
             swordScript = XZ10Script.instance.GetComponentInChildren<XZ10SwordScript>();
             currentSubState = subState.Strafe;
         }
-
-        public override GameObject GetGameObject() => gameObject;
-
-        public override string GetName() => name;
-
 
         public override void OnEnter()
         {
@@ -229,6 +225,52 @@ namespace bowen.StateMachine.XZ10
         public void Rotate()
         {
             ai.Rotate(PlayerController.instance.transform, 5);
+        }
+    }
+
+    public class Battle_Strafe : State
+    {
+        public override void Execute()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnEnter()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnExit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void SubStateChanger()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class Battle_Swing : State
+    {
+        public override void Execute()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnEnter()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnExit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void SubStateChanger()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

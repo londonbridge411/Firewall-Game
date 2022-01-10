@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c5c4d2cfda8e842b220b5bdaf96318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusic: 
   sounds:
   - name: Level2
     clip: {fileID: 8300000, guid: 0a2db4ccd48a7174f8cdbdba2706cdd9, type: 3}
@@ -51,7 +52,7 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: -1476588576892609551, guid: b1d5bca35e7b12746bf38f6b0e93e9c2, type: 2}
     source: {fileID: 0}
-  - name: MenuHover
+  - name: MenuClick
     clip: {fileID: 8300000, guid: 10afe988bc75ac745ae107a379231115, type: 3}
     volume: 1
     pitch: 1
@@ -64,4 +65,32 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     mixerGroup: {fileID: -1476588576892609551, guid: b1d5bca35e7b12746bf38f6b0e93e9c2, type: 2}
+    source: {fileID: 0}
+  - name: AdwareBoss
+    clip: {fileID: 8300000, guid: 7c6f7794298a19244b708f47583d8b93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    mixerGroup: {fileID: -1476588576892609551, guid: b1d5bca35e7b12746bf38f6b0e93e9c2, type: 2}
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 49c3ed410a111c742974be298fd0f885, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: -8752739382045518289, guid: b1d5bca35e7b12746bf38f6b0e93e9c2, type: 2}
+    source: {fileID: 0}
+  - name: MachineGunBullet
+    clip: {fileID: 8300000, guid: f308cf22a76da0543b359a771097d06b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: -8752739382045518289, guid: b1d5bca35e7b12746bf38f6b0e93e9c2, type: 2}
+    source: {fileID: 0}
+  - name: MenuHover
+    clip: {fileID: 8300000, guid: 49c3ed410a111c742974be298fd0f885, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: -8752739382045518289, guid: b1d5bca35e7b12746bf38f6b0e93e9c2, type: 2}
     source: {fileID: 0}

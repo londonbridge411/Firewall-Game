@@ -15,7 +15,7 @@ MonoBehaviour:
   bullet: {fileID: 5213885264620756758, guid: 9a3e4ca827430b3409a2b03d5df832d4, type: 3}
   numberOfBullets: 8
   cooldownTime: 1
-  rotation: 0
+  rotation: 50
   speed: 30
   canTrack: 0
   hasNextPattern: 0

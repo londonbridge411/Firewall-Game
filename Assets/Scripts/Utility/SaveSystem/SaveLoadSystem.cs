@@ -30,11 +30,11 @@ namespace bowen.Saving
 
         [ContextMenu("Save")]
         public void Save()
-        {
+        {    
             var state = LoadFile();
+            OnGameSave?.Invoke();
             CaptureState(state);
-            SaveFile(state);
-
+            SaveFile(state);       
         }
 
         [ContextMenu("Load")]
@@ -42,6 +42,7 @@ namespace bowen.Saving
         {
             var state = LoadFile();
             RestoreState(state);
+            OnGameLoad?.Invoke();
         }
 
         private void SaveFile(object state)
@@ -60,7 +61,7 @@ namespace bowen.Saving
                 return new Dictionary<string, object>();
             }
 
-            using (var stream = File.Open(SavePath, FileMode.Open   ))
+            using (var stream = File.Open(SavePath, FileMode.Open))
             {
                 var formatter = new BinaryFormatter();
                 return (Dictionary<string, object>)formatter.Deserialize(stream);
@@ -77,6 +78,21 @@ namespace bowen.Saving
 
         public void RestoreState(Dictionary<string, object> state)
         {
+            List<EnemySpawner> ignoredSpawnersPsuedoFilled = new List<EnemySpawner>();
+            List<EnemySpawner> ignoredSpawnersPsuedoDead = new List<EnemySpawner>();
+            foreach (EnemySpawner e in FindObjectsOfType<EnemySpawner>())
+            {
+                if (e.spawnState == EnemySpawner.SpawnerState.Psuedo_Filled)
+                {
+                    ignoredSpawnersPsuedoFilled.Add(e);
+                }
+
+                if (e.spawnState == EnemySpawner.SpawnerState.Psuedo_Dead)
+                {
+                    ignoredSpawnersPsuedoDead.Add(e);
+                }
+            }
+
             foreach (var saveable in FindObjectsOfType<SaveableEntity>())
             {
                 if (state.TryGetValue(saveable.Id, out object value))
@@ -84,7 +100,25 @@ namespace bowen.Saving
                     saveable.RestoreState(value);
                 }
             }
+
+            foreach (EnemySpawner e in ignoredSpawnersPsuedoFilled)
+            {
+                e.spawnState = EnemySpawner.SpawnerState.Psuedo_Filled;
+            }
+
+            foreach (EnemySpawner e in ignoredSpawnersPsuedoDead)
+            {
+                e.spawnState = EnemySpawner.SpawnerState.Psuedo_Dead;
+            }
         }
+
+        #region Saving & Loading Events
+        public delegate void OnSave();
+        public event OnSave OnGameSave;
+
+        public delegate void OnLoad();
+        public event OnLoad OnGameLoad;
+        #endregion
     }
 }
 

@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/TestWorld.unity
     guid: 26322e92193125442abf4ea66516fd66
   - enabled: 1
-    path: Assets/Scenes/Levels/Desktop/Desktop Test.unity
-    guid: c9395f30aec828b4a977d8a39078d6ab
+    path: Assets/Scenes/Levels/Desktop/Desktop.unity
+    guid: 1a0425e0fc671254c8bf809adee04b0c
   - enabled: 1
     path: Assets/Scenes/Inventory Testing.unity
     guid: da45db7eab4798a4382f3cf1623da378
@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SubsceneTesting.unity
     guid: 82d33cf8483b6094ea5a436d38d4b30e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Login/Login Main.unity
+    guid: f8fdeaacd3da66540a66c59491734f8f
   m_configObjects: {}

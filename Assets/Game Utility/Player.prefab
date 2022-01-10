@@ -1337,7 +1337,7 @@ MonoBehaviour:
   health: 100
   stamina: 100
   abilityAmount: 100
-  iFrameTime: 0
+  iFrameTime: 0.15
   canDamage: 1
 --- !u!114 &4282331852693872049
 MonoBehaviour:

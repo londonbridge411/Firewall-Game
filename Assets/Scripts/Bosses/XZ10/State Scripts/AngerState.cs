@@ -22,8 +22,7 @@ public class AngerState : State
 
     public override void OnEnter()
     {
-        //PlayAnimation
-        //Enable phase 2 enemies
+        name = "Anger";
         enemies.SetActive(true);
     }
 
@@ -41,8 +40,4 @@ public class AngerState : State
     {
         throw new System.NotImplementedException();
     }
-
-    public override string GetName() => name;
-
-    public override GameObject GetGameObject() => gameObject;
 }

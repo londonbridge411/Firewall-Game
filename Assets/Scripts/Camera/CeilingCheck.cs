@@ -39,31 +39,18 @@ public class CeilingCheck : MonoBehaviour
             }
         }
     }
-    private void Update()
-    {
-
-    }
 
     public IEnumerator SetModeTransparent(GameObject obj, bool setTransparent)
     {
-        //MeshRenderer renderer = obj.GetComponent<MeshRenderer>();
-
-        //renderer.material = new Material(renderer.material);
-        //Material currentMaterial = renderer.material;
         if (obj.GetComponent<MeshRenderer>())
         {
-            //Material currentMaterial = obj.GetComponent<MeshRenderer>().material;
-
             foreach (Material currentMaterial in obj.GetComponent<MeshRenderer>().materials)
             {
                 if (setTransparent)
                 {
                     for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
                     {
-                        if (obj.tag.Equals("Window"))
-                            value = Mathf.Lerp(0.55f, 0f, t); //(0.55f, -0.05f
-                        else
-                            value = Mathf.Lerp(1f, 0f, t); //(1.05f, -0.05f
+                        value = (obj.tag.Equals("Window")) ? Mathf.Lerp(0.55f, 0f, t) : Mathf.Lerp(1f, 0f, t);
                         currentMaterial.SetFloat("Vector1_74A4DCF8", value);
                         yield return new WaitForFixedUpdate();
                     }
@@ -72,10 +59,7 @@ public class CeilingCheck : MonoBehaviour
                 {
                     for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
                     {
-                        if (obj.tag.Equals("Window"))
-                            value = Mathf.Lerp(0f, 0.55f, t);
-                        else
-                            value = Mathf.Lerp(0f, 1f, t);
+                        value = (obj.tag.Equals("Window")) ? Mathf.Lerp(0f, 0.55f, t) : value = Mathf.Lerp(0f, 1f, t);
                         currentMaterial.SetFloat("Vector1_74A4DCF8", value);
                         yield return new WaitForFixedUpdate();
                     }
@@ -84,6 +68,5 @@ public class CeilingCheck : MonoBehaviour
         }
         else
             yield return null;       
-
     }       
 }

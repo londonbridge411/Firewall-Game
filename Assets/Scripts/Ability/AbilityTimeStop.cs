@@ -18,20 +18,11 @@ public class AbilityTimeStop : Ability
         PlayerController.instance.GetComponent<Rigidbody>().isKinematic = false;
 
         GameManager.instance.StoppedTime();
-        StartCoroutine(GameManager.StoppedTimeLerp());
-        StartCoroutine(GameManager.LensEffect());
-        StartCoroutine(CameraScript.instance.Shake(1.5f, 2, 1f));
     }
 
     public override void Deactivate()
     {
         GameManager.instance.ResumedTime();
-
-        if (GameManager.stoppedTime)
-        {
-            StartCoroutine(GameManager.StoppedTimeRevert());
-            GameManager.stoppedTime = false;
-        }
         
         Object[] list = Resources.FindObjectsOfTypeAll(typeof(Rigidbody));
 

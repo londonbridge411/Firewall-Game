@@ -53,27 +53,15 @@ public class PatternEditor : Editor
     }
 
 
-
+    // These cases are not used because the two display the same info. They are kept just in case but can be deleted without worry.
     private void DisplayFull()
     {
-
+       // Not needed yet
     }
 
     private void DisplayHalf()
     {
-        /*// Store the hasMagic bool as a serializedProperty so we can access it
-        SerializedProperty hasMagicProperty = serializedObject.FindProperty("hasMagic");
-
-        // Draw a property for the hasMagic bool
-        EditorGUILayout.PropertyField(hasMagicProperty);
-
-        // Check if hasMagic is true
-        if (hasMagicProperty.boolValue)
-        {
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("mana"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("magicType"));
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("magicDamage"));
-        }*/
+        // Not needed yet
     }
 
     private void DisplaySpiral()

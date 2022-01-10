@@ -21,20 +21,11 @@ public class Checkpoint : MonoBehaviour
                 PlayerStats.instance.health = 100;
             }
             LevelData.SetLevel();
-            ReloadEnemies();
             PlayerData.SetPosition(gameObject);
             PlayerData.SetScore(Score.instance.score);
             SaveLoadSystem.instance.Save();
         }
     }
 
-    private void ReloadEnemies()
-    {
-        AiStats[] list = (AiStats[]) Resources.FindObjectsOfTypeAll(typeof(AiStats));
 
-        foreach (AiStats ai in list)
-        {
-            ai.ResetAI();
-        }
-    }
 }

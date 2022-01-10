@@ -60,4 +60,14 @@ public class ElevatorDoor : MonoBehaviour, IDoor
         isOpen = (open > 0) ? true : false;
     }
     public bool AnimFinished(string stateName) => (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) ? true : false;
+
+    public void Lock()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Unlock()
+    {
+        throw new System.NotImplementedException();
+    }
 }

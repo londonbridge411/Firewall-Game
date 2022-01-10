@@ -6,4 +6,6 @@ public interface IDoor
 {
     void Open();
     void Close();
+    void Lock();
+    void Unlock();
 }

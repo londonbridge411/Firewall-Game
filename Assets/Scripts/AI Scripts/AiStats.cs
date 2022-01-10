@@ -20,16 +20,6 @@ public class AiStats : MonoBehaviour
     //private Vector3 startPosition;
     private float _health;
 
-    public enum EnemyRank
-    {
-        Red,
-        Orange,
-        Yellow,
-        Boss,
-    }
-
-    public EnemyRank rank;
-
     private void Start()
     {
         startPosition = transform.position;
@@ -39,35 +29,25 @@ public class AiStats : MonoBehaviour
 
     private void Update()
     {
-        if (Health <= 0)
+        if (_health <= 0)
         {
             if (GetComponentInParent<ItemDrop>())
             {
                 GetComponentInParent<ItemDrop>().Drop();
             }
-
-            if (rank == EnemyRank.Boss)
-            {
-                GetComponentInParent<ObjectManager>().DisableObject();
-            }
             else
             {
-                gameObject.SetActive(false);
+                Death();
             }
         }
-    }
-
-    public void PrintStats()
-    {
-        print(Health);
     }
 
     public void TakeDamage(float dmgValue)
     {
         if (GameManager.overclocked)
-            Health -= dmgValue* 2f;
+            _health -= dmgValue* 2f;
         else
-            Health -= dmgValue;
+            _health -= dmgValue;
     }
 
     public void ResetAI()
@@ -75,7 +55,17 @@ public class AiStats : MonoBehaviour
         gameObject.SetActive(true);
         gameObject.transform.position = startPosition;
         gameObject.transform.rotation = startRotation;
-        Health = _health;
+        _health = Health;
+    }
+
+    public delegate void EnemyHandler();
+
+    public event EnemyHandler OnDeath;
+
+    void Death()
+    {
+        gameObject.SetActive(false);
+        OnDeath?.Invoke();
     }
 }
 

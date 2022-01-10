@@ -165,12 +165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7002f7defdb20c14386f4e296ecf722f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
+  Health: 100
   Damage: 20
   Critdamage: 40
   Critchance: 10
   Points: 75
-  rank: 1
 --- !u!114 &6385278595618492331
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,8 +17,7 @@ public class EntranceDoor : MonoBehaviour, IDoor
     // Update is called once per frame
     void Update()
     {
-        if (isOpen)
-            Open();
+
     }
 
     public void Close()
@@ -29,5 +28,23 @@ public class EntranceDoor : MonoBehaviour, IDoor
     public void Open()
     {
         anim.SetBool("isOpen", true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Player"))
+        {
+            Open();
+        }
+    }
+
+    public void Lock()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Unlock()
+    {
+        throw new System.NotImplementedException();
     }
 }

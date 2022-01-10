@@ -57,6 +57,7 @@ public class GunScript : MonoBehaviour
     {
         ObjectPooler.instance.SpawnFromPool("Bullet", firePoint.position, firePoint.rotation);
         ObjectPooler.instance.SpawnFromPool("Shell", emptyPoint.position, emptyPoint.rotation);
+       // AudioManager.instance.PlayOneShot("MachineGunBullet");
 
         staminabar.MAX_STAMINA -= cost;
         PlayerStats.instance.stamina -= cost;

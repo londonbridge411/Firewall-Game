@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   objectPooledName: BH Small Bullet
-  speed: 25
+  speed: 20
 --- !u!54 &2180117978374659216
 Rigidbody:
   m_ObjectHideFlags: 0
