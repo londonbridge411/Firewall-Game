@@ -57,5 +57,21 @@ public class GhostTrail : MonoBehaviour
             ghostObj.transform.localScale = gameObject.transform.localScale;
             StartCoroutine(ObjectPooler.instance.Despawn(ghostObj, .25f));
         }
+        if (gameObject.GetComponent<WeaponSwapper>().weapons[gameObject.GetComponent<WeaponSwapper>().WeaponNumber].name.Equals("cyberkatana"))
+        {
+            string objectName = "";
+            if (GetComponentInChildren<SwordScript>().state == SwordScript.SwordState.IDLE)
+            {
+                objectName = "GhostSwordIdle";
+            }
+            else if (GetComponentInChildren<SwordScript>().state == SwordScript.SwordState.BLOCK)
+            {
+                objectName = "GhostSwordShield";
+            }
+
+            GameObject ghostObj = ObjectPooler.instance.SpawnFromPool(objectName, transform.position, transform.rotation);
+            ghostObj.transform.localScale = gameObject.transform.localScale;
+            StartCoroutine(ObjectPooler.instance.Despawn(ghostObj, .25f));
+        }
     }
 }

@@ -15,7 +15,7 @@ public class XZ10SwordScript : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-            PlayerStats.instance.Damage(damage);
+            PlayerStats.instance.Damage(damage, PlayerStats.ShakeAmount.LARGE);
         }
     }
 }

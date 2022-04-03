@@ -8,6 +8,7 @@ public class CameraScript : MonoBehaviour
 {
     public static CameraScript instance;
     private CinemachineBasicMultiChannelPerlin cameraNoise;
+    public bool isShaking;
     private Animator anim;
 
     private void Awake()
@@ -26,26 +27,24 @@ public class CameraScript : MonoBehaviour
 
     private void Update()
     {
-
+        //if (isShaking && )
     }
 
 
 
     public IEnumerator Shake(float amplitudeGain, float frequencyGain, float time)
     {
-        if (cameraNoise != null)
+        
+        if (cameraNoise != null && isShaking == false)
         {
+            isShaking = true;
             cameraNoise.m_AmplitudeGain = amplitudeGain;
             cameraNoise.m_FrequencyGain = frequencyGain;
-
             yield return new WaitForSeconds(time);
-            cameraNoise.m_AmplitudeGain = 0f;
-            cameraNoise.m_FrequencyGain = 0f;
         }
-        else
-        {
-            cameraNoise.m_AmplitudeGain = 0f;
-            cameraNoise.m_FrequencyGain = 0f;
-        }
+        isShaking = false;
+        cameraNoise.m_AmplitudeGain = 0f;
+        cameraNoise.m_FrequencyGain = 0f;
+
     }
 }

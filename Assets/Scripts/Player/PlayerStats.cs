@@ -11,9 +11,20 @@ public class PlayerStats : MonoBehaviour
     public float stamina;
     public float abilityAmount;
     public float iFrameTime;
+    public bool canRegen;
     [SerializeField]    
     private bool canDamage = true;
-    
+
+    public enum ShakeAmount
+    {
+        NONE,
+        EXTRA_SMALL,
+        SMALL,
+        MEDIUM,
+        LARGE,
+        EXTRA_LARGE
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -30,7 +41,7 @@ public class PlayerStats : MonoBehaviour
             abilityAmount = 100;
     }
 
-    public void Damage(float dmg)
+    public void Damage(float dmg, ShakeAmount amount)
     {
         if (canDamage)
         {
@@ -39,7 +50,27 @@ public class PlayerStats : MonoBehaviour
             else
                 health -= dmg;
             StartCoroutine(DamageCooldown());
-        }      
+
+            switch (amount)
+            {
+                case ShakeAmount.EXTRA_SMALL:
+                    StartCoroutine(CameraScript.instance.Shake(1, 2, 0.5f));
+                    break;
+                case ShakeAmount.SMALL:
+                    StartCoroutine(CameraScript.instance.Shake(3, 2, 0.5f));
+                    break;
+                case ShakeAmount.MEDIUM:
+                    StartCoroutine(CameraScript.instance.Shake(6, 3, 0.5f));
+                    break;
+                case ShakeAmount.LARGE:
+                    StartCoroutine(CameraScript.instance.Shake(10, 4, 0.5f));
+                    break;
+                case ShakeAmount.EXTRA_LARGE:
+                    StartCoroutine(CameraScript.instance.Shake(30, 5, 0.5f));
+                    break;
+            }
+            
+        }
     }
 
     public IEnumerator IFrames()
@@ -56,4 +87,31 @@ public class PlayerStats : MonoBehaviour
         canDamage = true;
     }
 
+    #region Staminia Handler
+
+    public void LoseStamina(float amount)
+    {
+        stamina -= amount;
+        StartCoroutine(StaminaRegenPause());
+    }
+
+    private IEnumerator StaminaRegen()
+    {
+        while (canRegen && stamina < Stamina_Bar.instance.MAX_STAMINA)
+        {
+            if (!canRegen)
+                break;
+            stamina += 20f * Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator StaminaRegenPause()
+    {
+        canRegen = false;
+        yield return new WaitForSeconds(0.75f);
+        canRegen = true;
+        StartCoroutine(StaminaRegen());
+    }
+    #endregion
 }

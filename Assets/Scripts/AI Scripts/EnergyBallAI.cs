@@ -25,7 +25,7 @@ public class EnergyBallAI : MonoBehaviour, IPooledObject
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerStats.instance.Damage(damage);
+            PlayerStats.instance.Damage(damage, PlayerStats.ShakeAmount.SMALL);
         }
         if (collision.gameObject.tag != "Ammo")
         {

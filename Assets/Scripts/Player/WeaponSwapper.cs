@@ -46,10 +46,13 @@ public class WeaponSwapper : MonoBehaviour
             Swap(WeaponNumber);
         }
     }
+    public delegate void WeaponHandler();
+    public event WeaponHandler OnWeaponChange;
 
     public void Swap(int index)
     {
-        StartCoroutine(CameraScript.instance.Shake(0, 0, 0));
+        //StartCoroutine(CameraScript.instance.Shake(0, 0, 0));
+        OnWeaponChange?.Invoke();
         foreach (GameObject g in weapons)
         {
             g.SetActive(false);

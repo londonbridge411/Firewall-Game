@@ -24,13 +24,12 @@ public class MenuControl : MonoBehaviour
     public Menu lastMenu;
     public PauseMenu pauseMenu;
     public bool isPaused;
+    public bool canPause = true;
 
     public void SwitchMenu(Menu menu)
     {
-
         if (currentMenu != null)
             currentMenu.CloseMenu();
-
         if (menu == PauseMenu.instance || menu == ItemMenu.instance) //Add characters menu
             lastMenu = null;
         else if (menu == OptionsMenu.instance)
@@ -61,6 +60,9 @@ public class MenuControl : MonoBehaviour
 
     void Update()
     {
+        if (!canPause)
+            return;
+
         //Controls Pausing
         if (Input.GetButtonDown("Start"))
         {

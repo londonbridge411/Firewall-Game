@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine;
 using bowen.Saving;
+using System.Runtime.InteropServices;
+using System.Drawing;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +15,12 @@ public class GameManager : MonoBehaviour
     static ColorAdjustments colorAdjust;
     static ChromaticAberration chromaticAberration;
     static LensDistortion lensDistortion;
+
+    [DllImport("user32.dll")]
+    public static extern bool SetCursorPos(int X, int Y);
+    [DllImport("user32.dll")]
+    public static extern bool GetCursorPos(out Point pos);
+    Point cursorPos = new Point();
 
     #region Singleton
     public static GameManager instance;
@@ -97,7 +105,7 @@ public class GameManager : MonoBehaviour
 
         for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
         {
-            lensDistortion.intensity.value = Mathf.Lerp(-0.75f, 0f, t);          
+            lensDistortion.intensity.value = Mathf.Lerp(-0.75f, 0f, t);
             yield return new WaitForFixedUpdate();
         }
 
@@ -124,22 +132,39 @@ public class GameManager : MonoBehaviour
     {
         for (float t = 0; t < 1; t += Time.deltaTime / 1f)
         {
-            colorAdjust.colorFilter.value = Color.Lerp(Color.white, Color.red, t);
+            colorAdjust.colorFilter.value = UnityEngine.Color.Lerp(UnityEngine.Color.white, UnityEngine.Color.red, t);
             yield return new WaitForFixedUpdate();
         }
 
-        colorAdjust.colorFilter.value = Color.red;
+        colorAdjust.colorFilter.value = UnityEngine.Color.red;
     }
 
     public static IEnumerator OverclockRevert()
     {
         for (float t = 0; t < 1; t += Time.deltaTime / 0.5f)
         {
-            colorAdjust.colorFilter.value = Color.Lerp(Color.red, Color.white, t);
+            colorAdjust.colorFilter.value = UnityEngine.Color.Lerp(UnityEngine.Color.red, UnityEngine.Color.white, t);
             yield return new WaitForFixedUpdate();
         }
 
-        colorAdjust.colorFilter.value = Color.white;
+        colorAdjust.colorFilter.value = UnityEngine.Color.white;
+    }
+    #endregion
+
+    // ONLY WORKS ON WINDOWS!!!!
+    #region ControlStuff
+    public void FreezeCursor()
+    {
+        GetCursorPos(out cursorPos);
+        Debug.Log("Freezeing at Pos " + cursorPos.ToString());
+        //Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void ResumeCursor()
+    {
+        Debug.Log("Resuming at Pos " + cursorPos.ToString());
+       // Cursor.lockState = CursorLockMode.Confined;
+        SetCursorPos(cursorPos.X, cursorPos.Y);
     }
     #endregion
 

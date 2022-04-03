@@ -25,15 +25,14 @@ namespace bowen.AI
             {
                 print(roll);
                 print("Critical Hit!");
-                StartCoroutine(CameraScript.instance.Shake(30f, 10f, .2f));
+                //StartCoroutine(CameraScript.instance.Shake(30f, 10f, .2f));
                 return critDMG;
             }
             else
             {
-                StartCoroutine(CameraScript.instance.Shake(7f, 3f, .2f));
+                //StartCoroutine(CameraScript.instance.Shake(7f, 3f, .2f));
                 return baseDMG;
             }
-
         }
 
         public abstract void Follow();

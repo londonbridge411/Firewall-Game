@@ -24,9 +24,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937020165623711145}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 122.561615, y: 153.18582, z: -66.9988}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,3 +84,9 @@ MonoBehaviour:
   - tag: BH Small Bullet
     prefab: {fileID: 2074678588447958052, guid: 9a3e4ca827430b3409a2b03d5df832d4, type: 3}
     size: 200
+  - tag: GhostSwordShield
+    prefab: {fileID: 146924721731571355, guid: 944b8028053c1884888a500d25fabfdb, type: 3}
+    size: 10
+  - tag: GhostSwordIdle
+    prefab: {fileID: 3633272898530311402, guid: ccfce1bfb720cb94fbfa0101f4c20227, type: 3}
+    size: 10

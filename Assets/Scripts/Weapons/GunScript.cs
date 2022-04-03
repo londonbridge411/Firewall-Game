@@ -48,7 +48,7 @@ public class GunScript : MonoBehaviour
             if (predictedStamina > 20)
             {
                 Fire();
-                StartCoroutine(CameraScript.instance.Shake(3, 2, .5f));
+                StartCoroutine(CameraScript.instance.Shake(3, 2, .1f));
             }
         }
     }

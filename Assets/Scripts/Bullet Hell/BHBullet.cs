@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BHBullet : MonoBehaviour, IPooledObject
+public class BHBullet : LethalObject, IPooledObject
 {
-    public float damage = 5f;
+    //public float damage = 5f;
     public string objectPooledName;
     public float speed;
     private Vector3 resumeVelocity;
@@ -49,8 +49,10 @@ public class BHBullet : MonoBehaviour, IPooledObject
 
         if (other.tag.Equals("Player"))
         {
-            PlayerStats.instance.Damage(damage);
+            //PlayerStats.instance.Damage(damage, PlayerStats.ShakeAmount.SMALL);
             //Destroy(gameObject);
+            DamagePlayer(damage, 1f, 300, PlayerStats.ShakeAmount.EXTRA_SMALL);
+            //StartCoroutine(CameraScript.instance.Shake(3, 2, 0.5f));
             ObjectPooler.instance.Despawn(gameObject);
         }
     }

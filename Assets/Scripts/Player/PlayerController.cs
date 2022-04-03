@@ -4,21 +4,26 @@ using Cinemachine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using bowen.Saving;
+using bowen.Interactable;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     [SerializeField] private Volume volume;
     MotionBlur motionBlur;
+
+    /*
     public float rayCastHeightOffset;
-    public static PlayerController instance;
     public LayerMask groundLayer;
     public bool isGrounded;
+    */
 
     [Header("Movement")]
     public float moveSpeed = 20f;
     public bool hitZero;
     public bool canMove;
+    public bool canRotate;
     Rigidbody rb;
 
     //public LayerMask raycastMask;
@@ -27,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 100;
     public float dashDuration;
     [SerializeField] bool isDashing;
+    [SerializeField] private bool canDash = true;
 
     [Header("Interactables")]
     bool byElevator;
@@ -39,7 +45,6 @@ public class PlayerController : MonoBehaviour
     public GameObject flashlight;
     Vector3 movementDirection;
 
-
     private bool hasLoaded = false;
 
     void Awake()
@@ -51,6 +56,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         canMove = true;
+        canRotate = true;
         if (instance == null)
         {
             instance = this;
@@ -104,8 +110,6 @@ public class PlayerController : MonoBehaviour
             stamina_Bar = FindObjectOfType<Stamina_Bar>();
         }
 
-        //Quick Punch
-
         if (stamina_Bar.MAX_STAMINA < 20)
         {
             stamina_Bar.MAX_STAMINA = 20;
@@ -124,13 +128,15 @@ public class PlayerController : MonoBehaviour
         else if (hitZero == false)
         {
             //Dash
-            if (Input.GetButtonDown("Dash") && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && canMove)
+            if (Input.GetButtonDown("Dash") && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && canMove && canDash)
             {
                 isDashing = true;
                 StartCoroutine(PlayerStats.instance.IFrames());
                 GetComponent<GhostTrail>().enabled = true;
-                PlayerStats.instance.stamina -= 20f;
+                PlayerStats.instance.LoseStamina(20f);
+                //PlayerStats.instance.stamina -= 20f;
                 AudioManager.instance.PlayOneShot("Dash");
+                PlayerStats.instance.canRegen = false;
             }
             else
             {
@@ -138,10 +144,12 @@ public class PlayerController : MonoBehaviour
                     moveSpeed = 45f;
                 else
                     moveSpeed = 20;
+
                 //Stamina Regen
                 if (PlayerStats.instance.stamina < stamina_Bar.MAX_STAMINA)
                 {
-                    PlayerStats.instance.stamina += 20f * Time.deltaTime;
+                    //PlayerStats.instance.stamina += 20f * Time.deltaTime;
+                    //StartCoroutine(PlayerStats.instance.StaminaRegen(20f));
                 }
             }
         }
@@ -168,6 +176,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(MotionBlurLerp(0, 1, 0.15f));
             StartCoroutine(DashTimer(dashDuration));
+            StartCoroutine(DashCooldown());
         }
     }
 
@@ -197,7 +206,7 @@ public class PlayerController : MonoBehaviour
             byElevator = true;
         }
 
-        if (other.tag.Equals("Interactable"))
+        if (other.GetComponent<Interactable>())
         {
             interactable = other.gameObject;
             byInteractable = true;
@@ -209,8 +218,10 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("Elevator"))
             byElevator = false;
 
-        if (other.tag.Equals("Interactable"))
+        if (other.GetComponent<Interactable>())
+        {
             byInteractable = false;
+        }
     }
 
     void ElevatorControl()
@@ -226,10 +237,13 @@ public class PlayerController : MonoBehaviour
 
     void RotatePlayer()
     {
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+        if (canRotate)
+        {
+            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.down);
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.down);
+        }
     }
 
     IEnumerator DashTimer(float t)
@@ -242,6 +256,13 @@ public class PlayerController : MonoBehaviour
         GetComponent<GhostTrail>().enabled = false;
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
         StartCoroutine(MotionBlurLerp(1, 0, t));
+    }
+
+    IEnumerator DashCooldown()
+    {
+        canDash = false;
+        yield return new WaitForSeconds(0.755f);
+        canDash = true;
     }
 
     IEnumerator MotionBlurLerp(float a, float b, float duration)
@@ -271,5 +292,19 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
             rb.velocity = new Vector3(movementDirection.x * moveSpeed, rb.velocity.y, movementDirection.z * moveSpeed);
+    }
+
+    public IEnumerator Knockback(float time, float power, Transform src)
+    {
+        float timer = 0;
+
+        while (time > timer)
+        {
+            timer += Time.deltaTime;
+            Vector3 direction = (src.position - transform.position).normalized;
+            rb.AddForce(-direction * power);
+        }
+
+        yield return 0;
     }
 }

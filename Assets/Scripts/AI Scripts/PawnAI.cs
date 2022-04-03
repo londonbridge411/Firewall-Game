@@ -81,7 +81,9 @@ public class PawnAI : AI
     {
         if (timer == false)
         {
-            PlayerStats.instance.Damage(DamageRandomizer(stats.Damage, stats.Critdamage, stats.Critchance));
+            float damageDealt = DamageRandomizer(stats.Damage, stats.Critdamage, stats.Critchance);
+            PlayerStats.ShakeAmount shake = (damageDealt == stats.Damage) ? PlayerStats.ShakeAmount.MEDIUM : PlayerStats.ShakeAmount.EXTRA_LARGE;
+            PlayerStats.instance.Damage(damageDealt, shake);
             timer = true;
         }
     }

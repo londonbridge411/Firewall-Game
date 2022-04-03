@@ -24,16 +24,7 @@ namespace bowen.Interactable
             print("Added " + itemData.itemName);
             InventoryManager.instance.AddInventoryItem(itemData); //Sends the item to the inventory manager.
             GetComponentInParent<ObjectManager>().DisableObject();
+            canInteract = false;
         }
-
-        // Update is called once per frame
-        /*void Update()
-        {
-            if (byInteractable)
-            {
-                if (Input.GetButtonDown("Interact"))
-                    Interact();
-            }
-        }*/
     }
 }
